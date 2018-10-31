@@ -26,7 +26,7 @@ pipeline {
 
     stage("Docker build") {
       steps {
-        sh "docker build -t banadipu/calculator:abc ."
+        sh "docker build -t banadipu/calculator_1 ."
       }
     }
 
@@ -34,13 +34,13 @@ pipeline {
       steps {
 	   sh "docker login -u banadipu -p bishnu12"
 
-        sh "docker push banadipu/calculator:abc"
+        sh "docker push banadipu/calculator_1"
       }
     }
 
     stage("Deploy to staging") {
       steps {
-       sh "docker run -d --rm -p 8765:8080 --name calculator:abc banadipu/calculator:abc"
+       sh "docker run -d --rm -p 8765:8080 --name calculator banadipu/calculator_1"
       }
     }
 
