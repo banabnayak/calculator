@@ -26,22 +26,15 @@ pipeline {
 
     stage("Docker build") {
       steps {
-        sh "sudo docker build -t leszko/calculator:${BUILD_TIMESTAMP} ."
-      }
-    }
-
-    stage("Docker login") {
-      steps {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'leszko',
-                          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-          sh "sudo docker login --username $USERNAME --password $PASSWORD"
-        }
+        sh "sudo docker build -t banabnayak/calculator:abc ."
       }
     }
 
     stage("Docker push") {
       steps {
-        sh "sudo docker push leszko/calculator:${BUILD_TIMESTAMP}"
+	   sh "docker login -u banadipu -p bishnu12"
+
+        sh "sudo docker push banabnayak/calculator:abc"
       }
     }
 
@@ -54,7 +47,7 @@ pipeline {
 
     stage("Acceptance test") {
       steps {
-	sh "./acceptance_test.sh 192.168.0.166"
+	sh "./acceptance_test.sh 18.224.67.101"
       }
     }
 	  
