@@ -43,13 +43,6 @@ pipeline {
        sh "docker run -d --rm -p 8765:8080 --name calculator banadipu/calculator_1"
       }
     }
-
-    stage("Acceptance test") {
-      steps {
-	 sleep 60
-          sh "./acceptance_test.sh"
-      }
-    }
 	  
     
   }
