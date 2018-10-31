@@ -26,7 +26,7 @@ pipeline {
 
     stage("Docker build") {
       steps {
-        sh "docker build -t banabnayak/calculator:abc ."
+        sh "docker build -t banadipu/calculator:abc ."
       }
     }
 
@@ -34,7 +34,7 @@ pipeline {
       steps {
 	   sh "docker login -u banadipu -p bishnu12"
 
-        sh "docker push banabnayak/calculator:abc"
+        sh "docker push banadipu/calculator:abc"
       }
     }
 
