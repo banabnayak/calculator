@@ -40,30 +40,17 @@ pipeline {
 
     stage("Deploy to staging") {
       steps {
-        sh "ansible-playbook playbook.yml -i inventory/staging"
-        sleep 60
+       sh "docker run -d --rm -p 8765:8080 --name calculator:abc banadipu/calculator:abc"
       }
     }
 
     stage("Acceptance test") {
       steps {
-	sh "./acceptance_test.sh 18.224.67.101"
+	 sleep 60
+          sh "./acceptance_test.sh"
       }
     }
 	  
-    // Performance test stages
-
-    stage("Release") {
-      steps {
-        sh "ansible-playbook playbook.yml -i inventory/production"
-        sleep 60
-      }
-    }
-
-    stage("Smoke test") {
-      steps {
-	sh "./smoke_test.sh 18.224.67.101"
-      }
-    }
+    
   }
 }
